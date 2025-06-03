@@ -2,4 +2,7 @@ version: "3"
 services:
   duckdb-app:
     build: ./TP1
-
+    volumes:
+      - ./outputs:/outputs
+    stdin_open: true
+    tty: true
