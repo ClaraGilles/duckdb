@@ -33,6 +33,6 @@ def load_into_duckdb(df):
     print(f"{len(df)} enregistrements chargés dans DuckDB.")
 
     # Optionnel: Sauvegarde en Parquet
-    df.to_parquet('data/clean/weather_data.parquet')
+    df.to_parquet('../data/clean/weather_data.parquet')
 
     con.close()

@@ -16,3 +16,7 @@
 
 - Sauvegarder les données propres en Parquet
 - Journaliser les erreurs dans un fichier log
+
+
+code executé :
+docker build -t mycronimage .

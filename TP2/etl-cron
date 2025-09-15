@@ -1,0 +1,2 @@
+# Run pipeline every minute
+* * * * * root /usr/local/bin/python3 /app/main.py >> /outputs/etl.log 2>&1

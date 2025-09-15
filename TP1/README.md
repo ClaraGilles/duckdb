@@ -16,4 +16,4 @@
    - Évolution temporelle moyenne
    - Agrégation par région
 
-- Comparer performances lecture CSV vs Parquet
+5. Comparer performances lecture CSV vs Parquet

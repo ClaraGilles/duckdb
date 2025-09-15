@@ -1,15 +1,17 @@
 services:
-  # duckdb-app-tp1:
-  #   build: ./TP1
-  #   volumes:
-  #     - ./outputs:/outputs
-  #   stdin_open: true
-  #   tty: true
+  duckdb-app-tp1:
+    build: ./TP1
+    container_name: duckdb_tp1
+    volumes:
+      - ./outputs:/outputs
+    stdin_open: true
+    tty: true
 
   duckdb-app-tp2:
-    build: ./TP2
-    volumes:
-      - ./TP2/outputs:/outputs
-      # - ./TP2/data:/app/data
-      - ./TP2/data/raw:/data/raw
-      - ./TP2/data/clean:/data/clean
+      build: ./TP2
+      container_name: duckdb_tp2
+      volumes:
+        - ./TP2/outputs:/outputs      # DB + logs
+        - ./TP2/data/raw:/data/raw    # données brutes
+        - ./TP2/data/clean:/data/clean # fichiers Parquet nettoyés
+      restart: always                 # pour relancer le container si crash

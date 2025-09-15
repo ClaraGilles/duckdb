@@ -5,6 +5,7 @@ import logging
 
 def run_pipeline():
     try:
+        logging.info('Ca marche')
         print('ok')
         df = fetch_data()
         df_clean = clean_data(df)
