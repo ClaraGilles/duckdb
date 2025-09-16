@@ -1,38 +1,3 @@
-# import streamlit as st
-# import duckdb
-# import pandas as pd
-
-# Connexion à DuckDB
-# con = duckdb.connect('/data/duckdb/weather_data.db', read_only=True)
-
-# st.title("Dashboard Météo")
-
-# # Filtres interactifs
-# cities = con.execute("SELECT DISTINCT city FROM weather_data").fetchall()
-# cities = [c for c in cities]
-# selected_city = st.selectbox("Choisir une ville", cities)
-
-# # Filtrage par ville
-# df = con.execute(
-#     "SELECT * FROM weather_data WHERE city = ?", [selected_city]
-# ).df()
-
-# # KPIs
-# st.metric("Nombre d'enregistrements", len(df))
-# st.metric("Température moyenne", round(df["temperature"].mean(), 2))
-
-# # Graphiques
-# st.line_chart(df.set_index("timestamp")["temperature"])
-# st.bar_chart(df.set_index("timestamp")["humidity"])
-
-# # Export CSV
-# csv = df.to_csv(index=False)
-# st.download_button("Télécharger CSV", data=csv, file_name="filtered_data.csv")
-
-
-
-# con.close()
-
 import streamlit as st
 import altair as alt
 import duckdb
