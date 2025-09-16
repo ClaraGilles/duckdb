@@ -4,7 +4,7 @@ FROM python:3.11-slim
 RUN pip install duckdb pandas pyarrow
 
 
-# # Copier le script Python dans ce dossier
+# Copier le script Python dans ce dossier
 COPY create_duckdb.py app/.
 COPY data/. app/data/.
 

@@ -3,14 +3,15 @@ import pandas as pd
 # Dossier où tu veux sauvegarder les données brutes
 
 def load_into_duckdb(df):
+    print(df)
     """Charge les données nettoyées dans DuckDB"""
     if df.empty:
         print("Aucune donnée à charger dans DuckDB.")
         return
-
+   
     # Connexion à DuckDB, crée une base persistante si nécessaire
     con = dd.connect('../outputs/weather_data.db')  # Ou un chemin valide pour stocker la DB persistante
-    
+  
     # Créer une table si elle n'existe pas
     con.execute('''
     CREATE TABLE IF NOT EXISTS weather_data (
