@@ -6,7 +6,7 @@ con = dd.connect('../outputs/covid.db')
 def create_insert_table(file_name, table_name):
     
     con.sql(f'''
-        CREATE TABLE {table_name} AS
+        CREATE TABLE IF NOT EXISTS {table_name} AS
             SELECT * FROM '{file_name}';
     ''')
     

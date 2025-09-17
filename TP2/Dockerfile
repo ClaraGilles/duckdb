@@ -2,8 +2,7 @@ FROM python:3.11-slim
 
 # Installer DuckDB + dépendances utiles + cron
 RUN apt-get update && apt-get install -y cron \
-    && pip install duckdb pandas pyarrow requests \
-    && pip install filelock
+    && pip install duckdb pandas pyarrow requests 
 
 # Créer le fichier de log et donner les droits
 RUN mkdir -p /outputs \

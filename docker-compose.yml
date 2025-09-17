@@ -1,26 +1,37 @@
 services:
-#   duckdb-app-tp1:
-#     build: ./TP1
-#     container_name: duckdb_tp1
-#     volumes:
-#       - ./outputs:/outputs
-#     stdin_open: true
-#     tty: true
+  # duckdb-app-tp1:
+  #   build: ./TP1
+  #   container_name: duckdb_tp1
+  #   volumes:
+  #     - ./outputs:/outputs
+  #   stdin_open: true
+  #   tty: true
 
-  duckdb-app-tp2:
-      build: ./TP2
-      container_name: duckdb_tp2
-      volumes:
-        - ./TP2/outputs:/outputs      # DB + logs
-        - ./TP2/data/raw:/data/raw    # données brutes
-        - ./TP2/data/clean:/data/clean # fichiers Parquet nettoyés
-      restart: always                 # pour relancer le container si crash
+  # duckdb-app-tp2:
+  #     build: ./TP2
+  #     container_name: duckdb_tp2
+  #     volumes:
+  #       - ./TP2/outputs:/outputs      # DB + logs
+  #       - ./TP2/data/raw:/data/raw    # données brutes
+  #       - ./TP2/data/clean:/data/clean # fichiers Parquet nettoyés
+  #     restart: always                 # pour relancer le container si crash 
 
-  duckdb-app-tp3:
-    build: ./TP3
-    container_name: duckdb_tp3
+  # duckdb-app-tp3:
+  #   build: ./TP3
+  #   container_name: duckdb_tp3
+  #   volumes:
+  #     - ./TP2/outputs:/data/duckdb  # Monte la DB de TP2
+  #   ports:
+  #     - "8501:8501"
+  #   stdin_open: true
+  #   tty: true
+
+  duckdb-app-tp4:
+    build: ./TP4
+    container_name: duckdb_tp4
     volumes:
-      - ./TP2/outputs:/data/duckdb  # Monte la DB de TP2
+      - ./TP4/data:/app/data 
+      - ./TP4/output:/app/output 
     ports:
       - "8501:8501"
     stdin_open: true
