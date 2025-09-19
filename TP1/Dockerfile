@@ -12,8 +12,7 @@ COPY data/. app/data/.
 WORKDIR /app
 
 COPY . .
+
 # Lancer le script (on est déjà dans /app grâce à WORKDIR)
-# CMD ["python", "create_duckdb.py"]
-# CMD ["python", "requests.py"]
 CMD ["sh", "-c", "python create_duckdb.py && python requests.py && sleep infinity"]
 

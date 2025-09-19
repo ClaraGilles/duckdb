@@ -37,3 +37,4 @@ def load_into_duckdb(df):
     df.to_parquet('../data/clean/weather_data.parquet')
 
     con.close()
+    
