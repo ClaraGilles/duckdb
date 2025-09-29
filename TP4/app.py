@@ -104,25 +104,17 @@ if selected:
 
     # Filtres dynamiques
     st.subheader("Filtres dynamiques")
-    try:
-        cols = con.execute(f"PRAGMA table_info('{selected}')").fetchdf()['name'].tolist()
-    except Exception:
-        cols = df_preview.columns.tolist() if not df_preview.empty else []
-    if cols:
+    if not df_preview.empty:
+        cols = df_preview.columns.tolist()
         col_filter = st.selectbox("Choisir une colonne", options=cols)
-        try:
-            unique_vals = con.execute(f"SELECT DISTINCT {col_filter} FROM {selected} LIMIT 1000").fetchdf()[col_filter].tolist()
-        except Exception:
-            unique_vals = []
+
+        unique_vals = df_preview[col_filter].unique().tolist()
         val = st.selectbox("Filter value (facultatif)", options=(["-- aucun --"] + [str(x) for x in unique_vals]))
+
         if val and val != "-- aucun --":
-            try:
-                q = f"SELECT * FROM {selected} WHERE {col_filter} = '{val}' LIMIT 100"
-                df_filtered = con.execute(q).fetchdf()
-                st.write(f"Résultat filtre ({len(df_filtered)} lignes)")
-                st.dataframe(df_filtered)
-            except Exception as e:
-                st.error(f"Erreur filtre: {e}")
+            df_filtered = df_preview[df_preview[col_filter].astype(str) == val]
+            st.write(f"Résultat filtre ({len(df_filtered)} lignes)")
+            st.dataframe(df_filtered)
 
     # Export parquet
     st.subheader("Exporter la table en Parquet")
@@ -135,21 +127,3 @@ if selected:
                 st.download_button("Télécharger le parquet", data=f, file_name=os.path.basename(target))
         except Exception as e:
             st.error(f"Erreur export: {e}")
-
-    # Graphique simple (colonne 'value' si présente)
-    st.subheader("Graphique simple")
-    try:
-        sample = con.execute(f"SELECT * FROM {selected} LIMIT 1000").fetchdf()
-        if 'value' in sample.columns:
-            st.line_chart(sample[['value']])
-        else:
-            st.write("Aucune colonne 'value' pour tracer un graphique simple.")
-    except Exception as e:
-        st.write(f"Impossible de tracer: {e}")
-
-st.markdown("""
----
-**Notes**
-- Le dossier `parquet_data/` est lu dynamiquement via DuckDB.
-- Pour tester localement : `streamlit run app.py`.
-""")
